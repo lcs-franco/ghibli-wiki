@@ -1,4 +1,4 @@
-import { People } from "../../types";
+import { People } from "../../../types";
 import { httpClient } from "../httpClient";
 
 type PeopleResponse = People;
