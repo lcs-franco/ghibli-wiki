@@ -1,3 +1,4 @@
+import { QueryClientProvider } from "@components/query-client-provider";
 import type { Metadata } from "next";
 import { Nunito, PT_Sans } from "next/font/google";
 import "./globals.css";
@@ -28,8 +29,10 @@ export default function RootLayout({
       <body
         className={`${nunito.variable} ${ptSans.variable} antialiased relative`}
       >
-        <div className="texture" />
-        {children}
+        <QueryClientProvider>
+          <div className="texture" />
+          {children}
+        </QueryClientProvider>
       </body>
     </html>
   );
