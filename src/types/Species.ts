@@ -1,6 +1,6 @@
 import { GhibliApi } from "./GhibliApi";
 
-export interface Specie extends GhibliApi {
+export interface Species extends GhibliApi {
   name: string;
   classification: string;
   eye_colors: string;

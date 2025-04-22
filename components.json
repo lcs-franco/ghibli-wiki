@@ -14,7 +14,8 @@
     "components": "@components",
     "ui": "@components/ui",
     "utils": "@utils",
-    "types": "@types"
+    "types": "@types",
+    "services": "@services"
   },
   "iconLibrary": "lucide"
 }
