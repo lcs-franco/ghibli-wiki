@@ -1,36 +1,36 @@
-import { Menu } from "lucide-react";
-import Link from "next/link";
-import { Totoro } from "./Totoro";
-import { Button } from "./ui/button";
+import { Menu } from 'lucide-react'
+import Link from 'next/link'
+import { Totoro } from './Totoro'
+import { Button } from './ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from './ui/dropdown-menu'
 
 const routes = [
   {
-    href: "/films",
-    label: "Films",
+    href: '/films',
+    label: 'Films',
   },
   {
-    href: "/people",
-    label: "People",
+    href: '/people',
+    label: 'People',
   },
   {
-    href: "/locations",
-    label: "Locations",
+    href: '/locations',
+    label: 'Locations',
   },
   {
-    href: "/species",
-    label: "Species",
+    href: '/species',
+    label: 'Species',
   },
   {
-    href: "/vehicles",
-    label: "Vehicles",
+    href: '/vehicles',
+    label: 'Vehicles',
   },
-];
+]
 
 export function Header() {
   return (
@@ -84,5 +84,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  );
+  )
 }
