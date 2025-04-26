@@ -1,3 +1,4 @@
+import { Footer } from '@components/Footer'
 import { Header } from '@components/Header'
 import { QueryClientProvider } from '@components/QueryClientProvider'
 import type { Metadata } from 'next'
@@ -34,7 +35,8 @@ export default function RootLayout({
           <div className="relative flex flex-col min-h-screen">
             <div className="texture" />
             <Header />
-            {children}
+            <div className="flex-1">{children}</div>
+            <Footer />
           </div>
         </QueryClientProvider>
       </body>
