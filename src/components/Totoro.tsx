@@ -1,5 +1,5 @@
 interface TotoroProps {
-  className?: string;
+  className?: string
 }
 
 export function Totoro({ className }: TotoroProps) {
@@ -78,5 +78,5 @@ export function Totoro({ className }: TotoroProps) {
 	s9-24.5,24.5-24.5S74.5,46.917,74.5,61z"
       />
     </svg>
-  );
+  )
 }
