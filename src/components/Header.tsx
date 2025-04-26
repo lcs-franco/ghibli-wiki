@@ -52,9 +52,7 @@ export function Header() {
               key={route.href}
               className="transition-colors ease-in-out hover:text-primary"
             >
-              <span className="border-b-2 border-transparent hover:border-primary transition-all duration-300 ease-in-out">
-                {route.label}
-              </span>
+              {route.label}
             </Link>
           ))}
         </nav>
