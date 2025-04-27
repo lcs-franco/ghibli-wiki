@@ -1,19 +1,19 @@
-import { vehiclesService } from "@lib/services/vehicles";
-import { useQuery } from "@tanstack/react-query";
+import { vehiclesService } from '@lib/services/vehicles'
+import { useQuery } from '@tanstack/react-query'
 
 export function useVehicle() {
   return useQuery({
-    queryKey: ["vehicle"],
+    queryKey: ['vehicle'],
     queryFn: vehiclesService.getAll,
     staleTime: Infinity,
-  });
+  })
 }
 
 export function useVehicleById(id: string) {
   return useQuery({
-    queryKey: ["vehicle", id],
+    queryKey: ['vehicle', id],
     queryFn: () => vehiclesService.getById(id),
     staleTime: Infinity,
     enabled: !!id,
-  });
+  })
 }
