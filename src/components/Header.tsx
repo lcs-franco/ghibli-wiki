@@ -1,36 +1,36 @@
-import { Menu } from "lucide-react";
-import Link from "next/link";
-import { Totoro } from "./Totoro";
-import { Button } from "./ui/button";
+import { Menu } from 'lucide-react'
+import Link from 'next/link'
+import { Totoro } from './Totoro'
+import { Button } from './ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from './ui/dropdown-menu'
 
 const routes = [
   {
-    href: "/films",
-    label: "Films",
+    href: '/films',
+    label: 'Films',
   },
   {
-    href: "/people",
-    label: "People",
+    href: '/people',
+    label: 'People',
   },
   {
-    href: "/locations",
-    label: "Locations",
+    href: '/locations',
+    label: 'Locations',
   },
   {
-    href: "/species",
-    label: "Species",
+    href: '/species',
+    label: 'Species',
   },
   {
-    href: "/vehicles",
-    label: "Vehicles",
+    href: '/vehicles',
+    label: 'Vehicles',
   },
-];
+]
 
 export function Header() {
   return (
@@ -52,9 +52,7 @@ export function Header() {
               key={route.href}
               className="transition-colors ease-in-out hover:text-primary"
             >
-              <span className="border-b-2 border-transparent hover:border-primary transition-all duration-300 ease-in-out">
-                {route.label}
-              </span>
+              {route.label}
             </Link>
           ))}
         </nav>
@@ -84,5 +82,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  );
+  )
 }
