@@ -1,8 +1,8 @@
-import { httpClient } from "../httpClient";
+import { httpClient } from '../httpClient'
 
-type LocationResponse = Location[];
+type LocationResponse = Location[]
 
 export async function getAll() {
-  const { data } = await httpClient.get<LocationResponse>("/locations");
-  return data;
+  const { data } = await httpClient.get<LocationResponse>('/locations')
+  return data
 }

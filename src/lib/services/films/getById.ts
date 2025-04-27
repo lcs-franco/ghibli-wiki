@@ -1,9 +1,9 @@
-import { Film } from "../../../types";
-import { httpClient } from "../httpClient";
+import { Film } from '../../../types'
+import { httpClient } from '../httpClient'
 
-type FilmResponse = Film;
+type FilmResponse = Film
 
 export async function getById(id: string) {
-  const { data } = await httpClient.get<FilmResponse>(`/films/${id}`);
-  return data;
+  const { data } = await httpClient.get<FilmResponse>(`/films/${id}`)
+  return data
 }
