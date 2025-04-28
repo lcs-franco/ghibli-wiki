@@ -42,7 +42,7 @@ export function Header() {
         >
           <Totoro className="h-14 w-14" />
           <span className="text-2xl font-bold sm:inline-block">
-            Studio Ghilbi Wiki
+            Studio Ghibli Wiki
           </span>
         </Link>
         <nav className="hidden gap-6 md:flex">
