@@ -29,10 +29,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nunito.variable} ${ptSans.variable} antialiased relative`}
+        className={`${nunito.variable} ${ptSans.variable} relative antialiased`}
       >
         <QueryClientProvider>
-          <div className="relative flex flex-col min-h-screen">
+          <div className="relative flex min-h-screen flex-col">
             <div className="texture" />
             <Header />
             <div className="flex-1">{children}</div>
