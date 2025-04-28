@@ -34,30 +34,30 @@ const routes = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex w-full mx-auto max-w-7xl justify-between h-16 items-center px-4 md:px-8">
+    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 md:px-8">
         <Link
           href="/"
-          className="flex items-center gap-2 transition-colors ease-in-out hover:text-primary"
+          className="hover:text-primary flex items-center gap-2 transition-colors ease-in-out"
         >
           <Totoro className="h-14 w-14" />
-          <span className="font-bold text-2xl sm:inline-block">
+          <span className="text-2xl font-bold sm:inline-block">
             Studio Ghilbi Wiki
           </span>
         </Link>
-        <nav className="hidden md:flex gap-6">
+        <nav className="hidden gap-6 md:flex">
           {routes.map((route) => (
             <Link
               href={route.href}
               key={route.href}
-              className="transition-colors ease-in-out hover:text-primary"
+              className="hover:text-primary transition-colors ease-in-out"
             >
               {route.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center justify-end flex-1 space-x-4 md:hidden">
+        <div className="flex flex-1 items-center justify-end space-x-4 md:hidden">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon" className="rounded-full">
@@ -71,7 +71,7 @@ export function Header() {
                   <Link
                     href={route.href}
                     key={route.href}
-                    className="relative inline-block transition-colors ease-in-out hover:text-primary w-full"
+                    className="hover:text-primary relative inline-block w-full transition-colors ease-in-out"
                   >
                     {route.label}
                   </Link>
