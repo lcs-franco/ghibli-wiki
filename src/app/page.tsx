@@ -13,7 +13,7 @@ export default function Home() {
             alt="Studio Ghibli Forest Background"
             width={2560}
             height={4388}
-            variant="shape1"
+            variant="shape6"
             className="h-full w-full object-cover"
           />
           <div className="bg-background/60 absolute inset-0"></div>
