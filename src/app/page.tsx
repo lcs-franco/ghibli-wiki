@@ -1,7 +1,8 @@
 import { FilmCarousel } from '@components/FIlmsCarousel'
 import { Button } from '@components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@components/ui/card'
 import { MaskedImage } from '@components/ui/masked-image'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Leaf, MapPin, Tractor, Users } from 'lucide-react'
 import Link from 'next/link'
 
 export default function Home() {
@@ -62,6 +63,84 @@ export default function Home() {
 
           <div className="mx-auto mt-2 max-w-5xl md:mt-16">
             <FilmCarousel />
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full pb-12 md:pb-20 lg:pb-24">
+        <div className="px-4 md:px-6">
+          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+            <div className="space-y-2">
+              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
+                Explore Categories
+              </h2>
+
+              <p className="text-muted-foreground max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                Dive into the different aspects of the Studio Ghibli universe
+              </p>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-8 grid max-w-5xl grid-cols-1 gap-6 md:mt-16 md:grid-cols-2 lg:grid-cols-4">
+            <Link href="/people">
+              <Card className="hover:border-primary h-full transition-colors">
+                <CardHeader className="flex items-center justify-between">
+                  <CardTitle className="text-lg font-medium">People</CardTitle>
+
+                  <Users className="text-primary h-5 w-5" />
+                </CardHeader>
+
+                <CardContent>
+                  <p>Descrition</p>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Link href="/locations">
+              <Card className="hover:border-primary h-full transition-colors">
+                <CardHeader className="flex items-center justify-between">
+                  <CardTitle className="text-lg font-medium">
+                    Locations
+                  </CardTitle>
+
+                  <MapPin className="text-primary h-5 w-5" />
+                </CardHeader>
+
+                <CardContent>
+                  <p>Descrition</p>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Link href="/species">
+              <Card className="hover:border-primary h-full transition-colors">
+                <CardHeader className="flex items-center justify-between">
+                  <CardTitle className="text-lg font-medium">Species</CardTitle>
+
+                  <Leaf className="text-primary h-5 w-5" />
+                </CardHeader>
+
+                <CardContent>
+                  <p>Descrition</p>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Link href="/vehicles">
+              <Card className="hover:border-primary h-full transition-colors">
+                <CardHeader className="flex items-center justify-between">
+                  <CardTitle className="text-lg font-medium">
+                    Vehicles
+                  </CardTitle>
+
+                  <Tractor className="text-primary h-5 w-5" />
+                </CardHeader>
+
+                <CardContent>
+                  <p>Descrition</p>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
         </div>
       </section>
