@@ -17,6 +17,7 @@ export default function Home() {
             variant="shape6"
             className="h-full w-full object-cover"
           />
+
           <div className="bg-background/60 absolute inset-0"></div>
         </div>
 
@@ -26,10 +27,12 @@ export default function Home() {
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
                 Discover the Magic of Studio Ghibli
               </h1>
+
               <p className="text-muted-foreground md:text-xl">
                 Explore the enchanting worlds, characters, and stories from the
                 legendary animation studio.
               </p>
+
               <div className="flex justify-center pt-4 md:justify-start">
                 <Link href="/films">
                   <Button size="lg">
@@ -50,11 +53,13 @@ export default function Home() {
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
                 Featured Films
               </h2>
+
               <p className="text-muted-foreground max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Explore the magical worlds created by Studio Ghibli
               </p>
             </div>
           </div>
+
           <div className="mx-auto mt-2 max-w-5xl md:mt-16">
             <FilmCarousel />
           </div>
