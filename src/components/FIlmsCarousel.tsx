@@ -1,4 +1,5 @@
 'use client'
+
 import { useFilms } from '@lib/hooks/films'
 import Autoplay from 'embla-carousel-autoplay'
 import { Star } from 'lucide-react'
