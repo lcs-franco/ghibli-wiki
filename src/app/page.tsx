@@ -91,7 +91,9 @@ export default function Home() {
                 </CardHeader>
 
                 <CardContent>
-                  <p>Descrition</p>
+                  <p className="text-muted-foreground text-sm">
+                    Meet the memorable characters from Studio Ghibli films.
+                  </p>
                 </CardContent>
               </Card>
             </Link>
@@ -107,7 +109,9 @@ export default function Home() {
                 </CardHeader>
 
                 <CardContent>
-                  <p>Descrition</p>
+                  <p className="text-muted-foreground text-sm">
+                    Visit the magical places and settings from the films.
+                  </p>
                 </CardContent>
               </Card>
             </Link>
@@ -121,7 +125,10 @@ export default function Home() {
                 </CardHeader>
 
                 <CardContent>
-                  <p>Descrition</p>
+                  <p className="text-muted-foreground text-sm">
+                    Discover the various species and creatures in the Ghibli
+                    universe.
+                  </p>
                 </CardContent>
               </Card>
             </Link>
@@ -137,7 +144,10 @@ export default function Home() {
                 </CardHeader>
 
                 <CardContent>
-                  <p>Descrition</p>
+                  <p className="text-muted-foreground text-sm">
+                    Ride the unique and magical transports of Studio Ghibli
+                    films.
+                  </p>
                 </CardContent>
               </Card>
             </Link>
