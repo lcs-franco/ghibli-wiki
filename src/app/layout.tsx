@@ -17,7 +17,7 @@ const ptSans = PT_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Ghibli Wiki',
+  title: ' Studio Ghibli Wiki',
   icons: '/miyazaki.png',
 }
 
