@@ -1,6 +1,7 @@
 import { Footer } from '@components/Footer'
 import { Header } from '@components/Header'
 import { QueryClientProvider } from '@components/QueryClientProvider'
+import { GhibliProvider } from '@lib/contexts/GhibliContext'
 import type { Metadata } from 'next'
 import { Nunito, PT_Sans } from 'next/font/google'
 import './globals.css'
@@ -32,12 +33,14 @@ export default function RootLayout({
         className={`${nunito.variable} ${ptSans.variable} relative antialiased`}
       >
         <QueryClientProvider>
-          <div className="relative flex min-h-screen flex-col">
-            <div className="texture" />
-            <Header />
-            <div className="flex-1">{children}</div>
-            <Footer />
-          </div>
+          <GhibliProvider>
+            <div className="relative flex min-h-screen flex-col">
+              <div className="texture" />
+              <Header />
+              <div className="flex-1">{children}</div>
+              <Footer />
+            </div>
+          </GhibliProvider>
         </QueryClientProvider>
       </body>
     </html>
