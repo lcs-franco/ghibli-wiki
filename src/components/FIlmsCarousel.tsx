@@ -39,7 +39,7 @@ export function FilmCarousel() {
             {[1, 2, 3].map((i) => (
               <CarouselItem key={i} className="pl-5 md:basis-1/2 lg:basis-1/3">
                 <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-lg">
-                  <div className="aspect-video w-full">
+                  <div className="aspect-[3/4] w-full">
                     <Skeleton className="h-full w-full" />
                   </div>
                   <CardHeader>
@@ -106,9 +106,9 @@ export function FilmCarousel() {
               className="pl-5 md:basis-1/2 lg:basis-1/3"
             >
               <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-lg">
-                <div className="relative aspect-video overflow-hidden">
+                <div className="relative aspect-[3/4] overflow-hidden">
                   <Image
-                    src={film.movie_banner}
+                    src={film.image}
                     alt={film.title}
                     fill
                     className="object-cover transition-transform duration-300 hover:scale-105"
