@@ -25,7 +25,7 @@ import {
   DropdownMenuTrigger,
 } from '../../ui/dropdown-menu'
 import { Input } from '../../ui/input'
-import { FilmsListSkeleton } from './FilmsListSkeleton'
+import { FilmsListSkeleton } from './Skeleton'
 import { useFilmsListController } from './useFilmsListController'
 
 export function FilmsList() {
