@@ -1,5 +1,4 @@
 import { FilmsList } from '@components/FilmsList'
-import { Suspense } from 'react'
 
 export const metadata = {
   title: 'Films | Studio Ghibli Wiki',
@@ -8,7 +7,7 @@ export const metadata = {
 export default function FilmsPage() {
   return (
     <main className="flex-1 py-12">
-      <div className="mx-auto max-w-7xl flex-1 overflow-hidden">
+      <div className="mx-auto max-w-7xl flex-1 overflow-hidden px-4 md:px-6">
         <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
           <div className="flex-1 space-y-4">
             <h1 className="inline-block text-4xl tracking-tight lg:text-5xl">
@@ -19,9 +18,9 @@ export default function FilmsPage() {
             </p>
           </div>
         </div>
-        <Suspense>
+        <div>
           <FilmsList />
-        </Suspense>
+        </div>
       </div>
     </main>
   )
