@@ -1,4 +1,4 @@
-import { FilmCarousel } from '@components/FIlmsCarousel'
+import { FilmCarousel } from '@components/Films/FIlmsCarousel'
 import { Button } from '@components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@components/ui/card'
 import { MaskedImage } from '@components/ui/masked-image'

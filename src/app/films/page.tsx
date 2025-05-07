@@ -1,4 +1,4 @@
-import { FilmsList } from '@components/FilmsList'
+import { FilmsList } from '@components/Films/FilmsPage/FilmsList'
 
 export const metadata = {
   title: 'Films | Studio Ghibli Wiki',
