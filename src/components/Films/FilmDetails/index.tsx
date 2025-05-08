@@ -7,11 +7,12 @@ import { useFilmsById } from '@lib/hooks/films'
 import { ArrowLeft, Leaf, MapPin, Star, Tractor, Users } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { FilmDetailsSkeleton } from './Skeleton'
 
 export function FilmDetails({ id }: { id: string }) {
   const { data: film, isLoading } = useFilmsById(id)
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <FilmDetailsSkeleton />
 
   if (!film) return <div>error</div>
 
