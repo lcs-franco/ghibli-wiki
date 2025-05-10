@@ -1,14 +1,8 @@
 'use client'
 
-import { useFilms } from '@lib/hooks/films'
-import Autoplay from 'embla-carousel-autoplay'
-import { Star } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
-import { Alert, AlertDescription, AlertTitle } from './ui/alert'
-import { Badge } from './ui/badge'
-import { Button } from './ui/button'
+import { Alert, AlertDescription, AlertTitle } from '@components/ui/alert'
+import { Badge } from '@components/ui/badge'
+import { Button } from '@components/ui/button'
 import {
   Card,
   CardContent,
@@ -16,14 +10,20 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from './ui/card'
+} from '@components/ui/card'
 import {
   Carousel,
   CarouselContent,
   CarouselDots,
   CarouselItem,
-} from './ui/carousel'
-import { Skeleton } from './ui/skeleton'
+} from '@components/ui/carousel'
+import { Skeleton } from '@components/ui/skeleton'
+import { useFilms } from '@lib/hooks/films'
+import Autoplay from 'embla-carousel-autoplay'
+import { Star } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
 
 export function FilmCarousel() {
   const { data: films, isLoading, error } = useFilms()
@@ -39,7 +39,7 @@ export function FilmCarousel() {
             {[1, 2, 3].map((i) => (
               <CarouselItem key={i} className="pl-5 md:basis-1/2 lg:basis-1/3">
                 <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-lg">
-                  <div className="aspect-video w-full">
+                  <div className="aspect-[3/4] w-full">
                     <Skeleton className="h-full w-full" />
                   </div>
                   <CardHeader>
@@ -106,9 +106,9 @@ export function FilmCarousel() {
               className="pl-5 md:basis-1/2 lg:basis-1/3"
             >
               <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-lg">
-                <div className="relative aspect-video overflow-hidden">
+                <div className="relative aspect-[3/4] overflow-hidden">
                   <Image
-                    src={film.movie_banner}
+                    src={film.image}
                     alt={film.title}
                     fill
                     className="object-cover transition-transform duration-300 hover:scale-105"
