@@ -49,7 +49,7 @@ export function FilmDetailsSkeleton() {
             </TabsList>
 
             <TabsContent value="people" className="mt-4">
-              people
+              <PeopleTabSkeleton />
             </TabsContent>
           </Tabs>
         </div>
@@ -86,6 +86,28 @@ export function FilmDetailsSkeleton() {
           </Card>
         </div>
       </div>
+    </div>
+  )
+}
+
+export function PeopleTabSkeleton() {
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {[1, 2, 3, 4].map((i) => (
+        <Card key={i}>
+          <CardHeader>
+            <Skeleton className="mb-1 h-5 w-32" />
+            <Skeleton className="h-4 w-16" />
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-12 w-full" />
+            </div>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   )
 }
