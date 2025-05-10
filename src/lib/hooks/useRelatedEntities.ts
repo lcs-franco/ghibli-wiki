@@ -46,15 +46,17 @@ type ExtractRelatedKeys<OriginalEntity> = {
     : never
 }[keyof OriginalEntity]
 
-export function useRelatedEntities<OriginalEntity extends Record<string, any>>(
-  entity: OriginalEntity | undefined,
-): {
+type RelatedEntitiesResponse<OriginalEntity> = {
   [Key in ExtractRelatedKeys<OriginalEntity>]: {
     data: RelatedEntityTypes[Key][]
     isLoading: boolean
     isError: boolean
   }
-} {
+}
+
+export function useRelatedEntities<OriginalEntity extends Record<string, any>>(
+  entity: OriginalEntity | undefined,
+): RelatedEntitiesResponse<OriginalEntity> {
   const indexTrackingMap: {
     key: keyof RelatedEntityTypes
     count: number
@@ -90,13 +92,7 @@ export function useRelatedEntities<OriginalEntity extends Record<string, any>>(
 
   const queryResults = useQueries({ queries: queryDefinitions })
 
-  const groupedResults = {} as {
-    [Key in ExtractRelatedKeys<OriginalEntity>]: {
-      data: RelatedEntityTypes[Key][]
-      isLoading: boolean
-      isError: boolean
-    }
-  }
+  const groupedResults = {} as RelatedEntitiesResponse<OriginalEntity>
 
   for (const { key, count, startIndex } of indexTrackingMap) {
     const group = queryResults.slice(startIndex, startIndex + count)
