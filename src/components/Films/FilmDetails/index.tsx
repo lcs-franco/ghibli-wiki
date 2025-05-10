@@ -1,20 +1,41 @@
 'use client'
 
+import { Alert, AlertDescription, AlertTitle } from '@components/ui/alert'
 import { Button } from '@components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@components/ui/card'
+import { Skeleton } from '@components/ui/skeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs'
 import { useFilmsById } from '@lib/hooks/films'
+import { useRelatedEntities } from '@lib/hooks/useRelatedEntities'
 import { ArrowLeft, Leaf, MapPin, Star, Tractor, Users } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FilmDetailsSkeleton } from './Skeleton'
+import { FilmDetailsSkeleton, PeopleTabSkeleton } from './Skeleton'
 
 export function FilmDetails({ id }: { id: string }) {
-  const { data: film, isLoading } = useFilmsById(id)
+  const { data: film, isLoading, error } = useFilmsById(id)
+  const { locations, people, species, vehicles } = useRelatedEntities(film)
 
   if (isLoading) return <FilmDetailsSkeleton />
 
-  if (!film) return <div>error</div>
+  if (!film || error) {
+    return (
+      <Alert variant="destructive" className="mt-8">
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>
+          {error instanceof Error
+            ? error.message
+            : 'Failed to load films. Please try again later.'}
+        </AlertDescription>
+      </Alert>
+    )
+  }
 
   return (
     <div className="space-y-8">
@@ -75,19 +96,170 @@ export function FilmDetails({ id }: { id: string }) {
             </TabsList>
 
             <TabsContent value="people" className="mt-4">
-              people
+              {people.isLoading ? (
+                <PeopleTabSkeleton />
+              ) : people.data.length > 0 ? (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {people.data.map((person) => (
+                    <Card key={person.id}>
+                      <CardHeader>
+                        <CardTitle>{person.name}</CardTitle>
+                        <CardDescription>{person.gender}</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid grid-cols-2 gap-2 text-sm">
+                          <div>
+                            <span className="font-medium">Age:</span>
+                            <p className="text-muted-foreground">
+                              {person.age}
+                            </p>
+                          </div>
+                          <div>
+                            <span className="font-medium">Eye Color:</span>
+                            <p className="text-muted-foreground">
+                              {person.eye_color}
+                            </p>
+                          </div>
+                          <div>
+                            <span className="font-medium">Hair Color:</span>
+                            <p className="text-muted-foreground">
+                              {person.hair_color}
+                            </p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-muted-foreground">
+                  No character information available.
+                </p>
+              )}
             </TabsContent>
 
             <TabsContent value="locations" className="mt-4">
-              locations
+              {locations.isLoading ? (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {[1, 2].map((i) => (
+                    <Card key={i}>
+                      <CardHeader>
+                        <Skeleton className="mb-1 h-6 w-40" />
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid grid-cols-2 gap-2 text-sm">
+                          <Skeleton className="h-12 w-full" />
+                          <Skeleton className="h-12 w-full" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : locations.data.length > 0 ? (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {locations.data.map((location) => (
+                    <Card key={location.id}>
+                      <CardHeader>
+                        <CardTitle>{location.name}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid grid-cols-2 gap-2 text-sm">
+                          <div>
+                            <span className="font-medium">Climate:</span>
+                            <p className="text-muted-foreground">
+                              {location.climate}
+                            </p>
+                          </div>
+                          <div>
+                            <span className="font-medium">Terrain:</span>
+                            <p className="text-muted-foreground">
+                              {location.terrain}
+                            </p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-muted-foreground">
+                  No location information available.
+                </p>
+              )}
             </TabsContent>
 
             <TabsContent value="species" className="mt-4">
-              species
+              {species.isLoading ? (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {[1, 2].map((i) => (
+                    <Card key={i}>
+                      <CardHeader>
+                        <Skeleton className="mb-1 h-6 w-40" />
+                        <Skeleton className="h-4 w-24" />
+                      </CardHeader>
+                    </Card>
+                  ))}
+                </div>
+              ) : species.data.length > 0 ? (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {species.data.map((specie) => (
+                    <Card key={specie.id}>
+                      <CardHeader>
+                        <CardTitle>{specie.name}</CardTitle>
+                        <CardDescription>
+                          {specie.classification}
+                        </CardDescription>
+                      </CardHeader>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-muted-foreground">
+                  No specie information available.
+                </p>
+              )}
             </TabsContent>
 
             <TabsContent value="vehicles" className="mt-4">
-              vehicles
+              {vehicles.isLoading ? (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {[1, 2].map((i) => (
+                    <Card key={i}>
+                      <CardHeader>
+                        <Skeleton className="mb-1 h-6 w-40" />
+                        <Skeleton className="h-4 w-24" />
+                      </CardHeader>
+                      <CardContent>
+                        <Skeleton className="mb-2 h-4 w-full" />
+                        <Skeleton className="mb-2 h-4 w-full" />
+                        <Skeleton className="h-4 w-2/3" />
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : vehicles.data.length > 0 ? (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {vehicles.data.map((vehicle) => (
+                    <Card key={vehicle.id}>
+                      <CardHeader>
+                        <CardTitle>{vehicle.name}</CardTitle>
+                        <CardDescription>
+                          {vehicle.vehicle_class}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">
+                          {vehicle.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-muted-foreground">
+                  No vehicle information available.
+                </p>
+              )}
             </TabsContent>
           </Tabs>
         </div>
