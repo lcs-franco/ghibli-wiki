@@ -7,6 +7,7 @@ import { speciesService } from '@lib/services/species'
 import { vehiclesService } from '@lib/services/vehicles'
 
 import { Film } from '@types/Film'
+import { Location } from '@types/Location'
 import { People } from '@types/People'
 import { Species } from '@types/Species'
 import { Vehicles } from '@types/Vehicles'
