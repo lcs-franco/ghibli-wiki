@@ -11,7 +11,7 @@ import { People } from '@types/People'
 import { Species } from '@types/Species'
 import { Vehicles } from '@types/Vehicles'
 
-type EntityTypeMap = {
+type RelatedEntityTypes = {
   vehicles: Vehicles
   species: Species
   locations: Location
@@ -19,9 +19,11 @@ type EntityTypeMap = {
   films: Film
 }
 
-const relatedEntityMap: {
-  [K in keyof EntityTypeMap]: {
-    service: { getById: (id: string) => Promise<EntityTypeMap[K]> }
+const relatedEntityServiceMap: {
+  [EntityName in keyof RelatedEntityTypes]: {
+    service: {
+      getById: (id: string) => Promise<RelatedEntityTypes[EntityName]>
+    }
   }
 } = {
   vehicles: { service: vehiclesService },
@@ -31,71 +33,78 @@ const relatedEntityMap: {
   films: { service: filmsService },
 }
 
-type RelatedKeys<T> = {
-  [K in keyof T]: T[K] extends string[]
-    ? K extends keyof EntityTypeMap
-      ? K
+/**
+ * Filter only the keys of original entity that:
+ * - are string arrays (ex: URLs)
+ * - are also present in the map of related entities
+ */
+type ExtractRelatedKeys<OriginalEntity> = {
+  [Key in keyof OriginalEntity]: OriginalEntity[Key] extends string[]
+    ? Key extends keyof RelatedEntityTypes
+      ? Key
       : never
     : never
-}[keyof T]
+}[keyof OriginalEntity]
 
-export function useRelatedEntities<T extends Record<string, any>>(
-  entity: T | undefined,
+export function useRelatedEntities<OriginalEntity extends Record<string, any>>(
+  entity: OriginalEntity | undefined,
 ): {
-  [K in RelatedKeys<T>]: {
-    data: EntityTypeMap[K][]
+  [Key in ExtractRelatedKeys<OriginalEntity>]: {
+    data: RelatedEntityTypes[Key][]
     isLoading: boolean
     isError: boolean
   }
 } {
-  const indexMap: {
-    key: keyof EntityTypeMap
+  const indexTrackingMap: {
+    key: keyof RelatedEntityTypes
     count: number
     startIndex: number
   }[] = []
 
-  const queries: UseQueryOptions[] = []
-  let index = 0
+  const queryDefinitions: UseQueryOptions[] = []
+  let currentStartIndex = 0
 
-  for (const key of Object.keys(relatedEntityMap) as (keyof EntityTypeMap)[]) {
-    const urls = entity?.[key]
+  for (const entityKey of Object.keys(
+    relatedEntityServiceMap,
+  ) as (keyof RelatedEntityTypes)[]) {
+    const urls = entity?.[entityKey]
     if (!Array.isArray(urls) || urls.length === 0) continue
 
     const ids = urls.map((url) => url.split('/').pop()!).filter(Boolean)
 
-    indexMap.push({
-      key,
+    indexTrackingMap.push({
+      key: entityKey,
       count: ids.length,
-      startIndex: index,
+      startIndex: currentStartIndex,
     })
 
     const options = ids.map((id) => ({
-      queryKey: [key, id],
-      queryFn: () => relatedEntityMap[key].service.getById(id),
+      queryKey: [entityKey, id],
+      queryFn: () => relatedEntityServiceMap[entityKey].service.getById(id),
       enabled: !!id,
     }))
 
-    queries.push(...options)
-    index += ids.length
+    queryDefinitions.push(...options)
+    currentStartIndex += ids.length
   }
 
-  const results = useQueries({ queries })
+  const queryResults = useQueries({ queries: queryDefinitions })
 
   const groupedResults = {} as {
-    [K in RelatedKeys<T>]: {
-      data: EntityTypeMap[K][]
+    [Key in ExtractRelatedKeys<OriginalEntity>]: {
+      data: RelatedEntityTypes[Key][]
       isLoading: boolean
       isError: boolean
     }
   }
 
-  for (const { key, count, startIndex } of indexMap) {
-    const group = results.slice(startIndex, startIndex + count)
+  for (const { key, count, startIndex } of indexTrackingMap) {
+    const group = queryResults.slice(startIndex, startIndex + count)
 
-    groupedResults[key as RelatedKeys<T>] = {
+    groupedResults[key as ExtractRelatedKeys<OriginalEntity>] = {
       data: group
         .map((q) => q.data)
-        .filter(Boolean) as EntityTypeMap[typeof key][],
+        .filter(Boolean) as RelatedEntityTypes[typeof key][],
       isLoading: group.some((q) => q.isLoading),
       isError: group.some((q) => q.isError),
     }
