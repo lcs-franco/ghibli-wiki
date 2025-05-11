@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-7xl flex-1 overflow-hidden">
       <section className="relative w-full py-12 md:py-32 lg:py-40">
-        <div className="absolute inset-0 h-full w-full lg:-ml-[10%] lg:w-[120%] xl:-ml-[15%] xl:w-[130%]">
+        <div className="absolute inset-0 h-full w-full px-4 md:px-6 lg:-ml-[10%] lg:w-[120%] lg:px-32 xl:-ml-[10%] xl:w-[120%]">
           <MaskedImage
             src="/house.webp"
             alt="Studio Ghibli Forest Background"

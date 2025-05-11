@@ -1,4 +1,4 @@
-import { Vehicles } from '../../../types'
+import { Vehicles } from '../../types'
 import { httpClient } from '../httpClient'
 
 type VehiclesResponse = Vehicles

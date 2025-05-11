@@ -1,4 +1,4 @@
-import { Species } from '../../../types'
+import { Species } from '../../types'
 import { httpClient } from '../httpClient'
 
 type SpeciesResponse = Species

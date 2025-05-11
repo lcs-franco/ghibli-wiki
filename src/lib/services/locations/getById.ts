@@ -1,3 +1,4 @@
+import { Location } from '../../types/Location'
 import { httpClient } from '../httpClient'
 
 type LocationResponse = Location

@@ -10,6 +10,7 @@ export interface Film extends GhibliApi {
   director: string
   producer: string
   release_date: string
+  running_time: string
   rt_score: string
   people: string[]
   species: string[]
