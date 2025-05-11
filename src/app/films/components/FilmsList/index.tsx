@@ -1,11 +1,8 @@
 'use client'
 
-import { Filter, Search, Star } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { Alert, AlertDescription, AlertTitle } from '../../ui/alert'
-import { Badge } from '../../ui/badge'
-import { Button } from '../../ui/button'
+import { Alert, AlertDescription, AlertTitle } from '@components/ui/alert'
+import { Badge } from '@components/ui/badge'
+import { Button } from '@components/ui/button'
 import {
   Card,
   CardContent,
@@ -13,7 +10,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../../ui/card'
+} from '@components/ui/card'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,8 +20,11 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '../../ui/dropdown-menu'
-import { Input } from '../../ui/input'
+} from '@components/ui/dropdown-menu'
+import { Input } from '@components/ui/input'
+import { Filter, Search, Star } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 import { FilmsListSkeleton } from './Skeleton'
 import { useFilmsListController } from './useFilmsListController'
 
