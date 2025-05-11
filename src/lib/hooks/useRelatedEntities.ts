@@ -6,11 +6,11 @@ import { peoplesService } from '@lib/services/peoples'
 import { speciesService } from '@lib/services/species'
 import { vehiclesService } from '@lib/services/vehicles'
 
-import { Film } from '@types/Film'
-import { Location } from '@types/Location'
-import { People } from '@types/People'
-import { Species } from '@types/Species'
-import { Vehicles } from '@types/Vehicles'
+import { Film } from '@lib/types/Film'
+import { Location } from '@lib/types/Location'
+import { People } from '@lib/types/People'
+import { Species } from '@lib/types/Species'
+import { Vehicles } from '@lib/types/Vehicles'
 
 /**
  * Expected types for each related entity
@@ -45,13 +45,16 @@ const relatedEntityServiceMap: {
  * - are string arrays (e.g. URLs)
  * - are also present in the map of related entities
  */
-type ExtractRelatedKeys<OriginalEntity> = {
-  [Key in keyof OriginalEntity]: OriginalEntity[Key] extends string[]
-    ? Key extends keyof RelatedEntityTypes
-      ? Key
+type ExtractRelatedKeys<OriginalEntity> = Extract<
+  {
+    [Key in keyof OriginalEntity]: OriginalEntity[Key] extends string[]
+      ? Key extends keyof RelatedEntityTypes
+        ? Key
+        : never
       : never
-    : never
-}[keyof OriginalEntity]
+  }[keyof OriginalEntity],
+  keyof RelatedEntityTypes
+>
 
 /**
  * Return structure of the `useRelatedEntities` hook, with data loaded from each related entity
@@ -118,7 +121,10 @@ export function useRelatedEntities<OriginalEntity extends Record<string, any>>(
     groupedResults[key as ExtractRelatedKeys<OriginalEntity>] = {
       data: group
         .map((q) => q.data)
-        .filter(Boolean) as RelatedEntityTypes[typeof key][],
+        .filter(
+          (d): d is RelatedEntityTypes[ExtractRelatedKeys<OriginalEntity>] =>
+            Boolean(d),
+        ),
       isLoading: group.some((q) => q.isLoading),
       isError: group.some((q) => q.isError),
     }
