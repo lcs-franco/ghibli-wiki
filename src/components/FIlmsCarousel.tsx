@@ -18,7 +18,7 @@ import {
   CarouselItem,
 } from '@components/ui/carousel'
 import { Skeleton } from '@components/ui/skeleton'
-import { useFilms } from '@lib/hooks/films'
+import { useFilms } from '@lib/hooks/films/useFilms'
 import Autoplay from 'embla-carousel-autoplay'
 import { Star } from 'lucide-react'
 import Image from 'next/image'

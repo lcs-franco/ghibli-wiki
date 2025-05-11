@@ -11,7 +11,7 @@ import {
 } from '@components/ui/card'
 import { Skeleton } from '@components/ui/skeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs'
-import { useFilmsById } from '@lib/hooks/films'
+import { useFilmsById } from '@lib/hooks/films/useFilmsById'
 import { useRelatedEntities } from '@lib/hooks/useRelatedEntities'
 import { ArrowLeft, Leaf, MapPin, Star, Tractor, Users } from 'lucide-react'
 import Image from 'next/image'
