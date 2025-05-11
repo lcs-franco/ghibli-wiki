@@ -1,4 +1,4 @@
-import { FilmDetails } from '@app/films/components/FilmDetails'
+import { FilmDetails } from '../components/FilmDetails'
 
 interface FilmPageProps {
   params: {
