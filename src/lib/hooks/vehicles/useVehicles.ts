@@ -8,12 +8,3 @@ export function useVehicle() {
     staleTime: Infinity,
   })
 }
-
-export function useVehicleById(id: string) {
-  return useQuery({
-    queryKey: ['vehicle', id],
-    queryFn: () => vehiclesService.getById(id),
-    staleTime: Infinity,
-    enabled: !!id,
-  })
-}
