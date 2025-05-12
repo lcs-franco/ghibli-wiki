@@ -8,12 +8,3 @@ export function useFilms() {
     staleTime: Infinity,
   })
 }
-
-export function useFilmsById(id: string) {
-  return useQuery({
-    queryKey: ['films', id],
-    queryFn: () => filmsService.getById(id),
-    staleTime: Infinity,
-    enabled: !!id,
-  })
-}

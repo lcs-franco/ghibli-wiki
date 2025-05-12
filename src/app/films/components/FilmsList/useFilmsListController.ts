@@ -1,5 +1,5 @@
 import { useGhibliContext } from '@lib/contexts/GhibliContext'
-import { useFilms } from '@lib/hooks/films'
+import { useFilms } from '@lib/hooks/films/useFilms'
 
 export function useFilmsListController() {
   const { data: films, isLoading, error } = useFilms()

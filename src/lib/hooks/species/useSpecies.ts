@@ -8,12 +8,3 @@ export function useSpecies() {
     staleTime: Infinity,
   })
 }
-
-export function useSpeciesById(id: string) {
-  return useQuery({
-    queryKey: ['species', id],
-    queryFn: () => speciesService.getById(id),
-    staleTime: Infinity,
-    enabled: !!id,
-  })
-}
