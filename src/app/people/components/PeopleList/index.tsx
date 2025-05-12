@@ -3,6 +3,7 @@
 import { Filter, Search } from 'lucide-react'
 import Link from 'next/link'
 
+import { Alert, AlertDescription, AlertTitle } from '@components/ui/alert'
 import { Badge } from '@components/ui/badge'
 import { Button } from '@components/ui/button'
 import {
@@ -24,6 +25,7 @@ import {
   DropdownMenuTrigger,
 } from '@components/ui/dropdown-menu'
 import { Input } from '@components/ui/input'
+import { PeopleListSkeleton } from './Skeleton'
 import { usePeopleListController } from './usePeopleListController'
 
 export function PeopleList() {
@@ -37,9 +39,26 @@ export function PeopleList() {
     clearAllFilters,
     filters,
     filteredPeople,
+    isLoading,
+    error,
   } = usePeopleListController()
 
   const { gender, species } = filters.people
+
+  if (isLoading) return <PeopleListSkeleton />
+
+  if (error) {
+    return (
+      <Alert variant="destructive" className="mt-8">
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>
+          {error instanceof Error
+            ? error.message
+            : 'Failed to load people. Please try again later.'}
+        </AlertDescription>
+      </Alert>
+    )
+  }
 
   return (
     <div className="mt-8 space-y-6">
