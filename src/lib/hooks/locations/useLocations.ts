@@ -8,12 +8,3 @@ export function useLocations() {
     staleTime: Infinity,
   })
 }
-
-export function useLocationsById(id: string) {
-  return useQuery({
-    queryKey: ['location', id],
-    queryFn: () => locationsService.getById(id),
-    staleTime: Infinity,
-    enabled: !!id,
-  })
-}
