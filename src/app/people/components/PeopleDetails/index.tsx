@@ -1,6 +1,7 @@
 'use client'
 
 import { Alert, AlertDescription, AlertTitle } from '@components/ui/alert'
+import { Badge } from '@components/ui/badge'
 import { Button } from '@components/ui/button'
 import {
   Card,
@@ -16,8 +17,7 @@ import Link from 'next/link'
 
 export function PersonDetails({ id }: { id: string }) {
   const { data: person, error } = usePeopleById(id)
-
-  const { films } = useRelatedEntities(person)
+  const { films, species } = useRelatedEntities(person)
 
   if (!person || error) {
     return (
@@ -51,6 +51,11 @@ export function PersonDetails({ id }: { id: string }) {
               <CardDescription className="text-lg">
                 {person.gender}
               </CardDescription>
+              {species && (
+                <Badge variant="outline" className="mt-2">
+                  {species.data.map((specie) => specie.name)}
+                </Badge>
+              )}
             </CardHeader>
 
             <CardContent>
@@ -67,6 +72,14 @@ export function PersonDetails({ id }: { id: string }) {
                   <h3 className="font-medium">Hair Color</h3>
                   <p className="text-muted-foreground">{person.hair_color}</p>
                 </div>
+                {species && (
+                  <div>
+                    <h3 className="font-medium">Species Classification</h3>
+                    <p className="text-muted-foreground">
+                      {species.data.map((specie) => specie.classification)}
+                    </p>
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
