@@ -31,7 +31,7 @@ export function FilmDetails({ id }: { id: string }) {
         <AlertDescription>
           {error instanceof Error
             ? error.message
-            : 'Failed to load films. Please try again later.'}
+            : 'Failed to load film. Please try again later.'}
         </AlertDescription>
       </Alert>
     )
