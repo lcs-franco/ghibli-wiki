@@ -1,5 +1,8 @@
 'use client'
 
+import { ArrowLeft, Film, Star } from 'lucide-react'
+import Link from 'next/link'
+
 import { Alert, AlertDescription, AlertTitle } from '@components/ui/alert'
 import { Badge } from '@components/ui/badge'
 import { Button } from '@components/ui/button'
@@ -12,8 +15,7 @@ import {
 } from '@components/ui/card'
 import { usePeopleById } from '@lib/hooks/people/usePeopleById'
 import { useRelatedEntities } from '@lib/hooks/useRelatedEntities'
-import { ArrowLeft, Film, Star } from 'lucide-react'
-import Link from 'next/link'
+import { FilmCardSkeleton, PersonDetailsSkeleton } from './Skeleton'
 
 export function PersonDetails({ id }: { id: string }) {
   const { data: person, error } = usePeopleById(id)
