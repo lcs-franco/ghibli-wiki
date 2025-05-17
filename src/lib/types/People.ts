@@ -7,5 +7,5 @@ export interface People extends GhibliApi {
   eye_color: string
   hair_color: string
   films: string[]
-  species: string[]
+  species: string
 }

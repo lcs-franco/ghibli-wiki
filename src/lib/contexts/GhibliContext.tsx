@@ -1,9 +1,11 @@
 'use client'
 import { FilmFilters } from '@lib/services/films'
+import { PeopleFilters } from '@lib/services/peoples'
 import { createContext, useCallback, useContext, useState } from 'react'
 
 interface GhibliFilters {
   films: FilmFilters
+  people: PeopleFilters
 }
 
 interface GhibliContextType {
@@ -12,6 +14,7 @@ interface GhibliContextType {
 
   filters: GhibliFilters
   handleChangeFilmFilters: (filters: FilmFilters) => void
+  handleChangePeopleFilters: (filters: PeopleFilters) => void
 
   clearFilters: (category: keyof GhibliFilters) => void
 }
@@ -20,6 +23,7 @@ const GhibliContext = createContext({} as GhibliContextType)
 
 const initialFilters: GhibliFilters = {
   films: { director: null, decade: null, rating: null },
+  people: { species: null, gender: null },
 }
 
 export function GhibliProvider({ children }: { children: React.ReactNode }) {
@@ -30,6 +34,13 @@ export function GhibliProvider({ children }: { children: React.ReactNode }) {
   const handleChangeFilmFilters = useCallback((filmFilters: FilmFilters) => {
     setFilters((prevState) => ({ ...prevState, films: filmFilters }))
   }, [])
+
+  const handleChangePeopleFilters = useCallback(
+    (peopleFilters: PeopleFilters) => {
+      setFilters((prevState) => ({ ...prevState, people: peopleFilters }))
+    },
+    [],
+  )
 
   const clearFilters = useCallback((category: keyof GhibliFilters) => {
     setFilters((prevState) => ({
@@ -42,11 +53,12 @@ export function GhibliProvider({ children }: { children: React.ReactNode }) {
   return (
     <GhibliContext.Provider
       value={{
-        handleChangeFilmFilters,
         searchQuery,
         setSearchQuery,
         filters,
         clearFilters,
+        handleChangeFilmFilters,
+        handleChangePeopleFilters,
       }}
     >
       {children}

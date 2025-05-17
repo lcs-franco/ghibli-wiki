@@ -47,7 +47,7 @@ const relatedEntityServiceMap: {
  */
 type ExtractRelatedKeys<OriginalEntity> = Extract<
   {
-    [Key in keyof OriginalEntity]: OriginalEntity[Key] extends string[]
+    [Key in keyof OriginalEntity]: OriginalEntity[Key] extends string | string[]
       ? Key extends keyof RelatedEntityTypes
         ? Key
         : never
@@ -90,8 +90,10 @@ export function useRelatedEntities<OriginalEntity extends Record<string, any>>(
   for (const entityKey of Object.keys(
     relatedEntityServiceMap,
   ) as (keyof RelatedEntityTypes)[]) {
-    const urls = entity?.[entityKey]
-    if (!Array.isArray(urls) || urls.length === 0) continue
+    const raw = entity?.[entityKey]
+    const urls = Array.isArray(raw) ? raw : raw ? [raw] : []
+
+    if (urls.length === 0) continue
 
     const ids = urls.map((url) => url.split('/').pop()!).filter(Boolean)
 
