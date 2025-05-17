@@ -18,8 +18,10 @@ import { useRelatedEntities } from '@lib/hooks/useRelatedEntities'
 import { FilmCardSkeleton, PersonDetailsSkeleton } from './Skeleton'
 
 export function PersonDetails({ id }: { id: string }) {
-  const { data: person, error } = usePeopleById(id)
+  const { data: person, isLoading, error } = usePeopleById(id)
   const { films, species } = useRelatedEntities(person)
+
+  if (isLoading) return <PersonDetailsSkeleton />
 
   if (!person || error) {
     return (
@@ -50,9 +52,11 @@ export function PersonDetails({ id }: { id: string }) {
           <Card>
             <CardHeader className="flex flex-col items-center text-center">
               <CardTitle className="text-2xl">{person.name}</CardTitle>
+
               <CardDescription className="text-lg">
                 {person.gender}
               </CardDescription>
+
               {species && (
                 <Badge variant="outline" className="mt-2">
                   {species.data.map((specie) => specie.name)}
@@ -92,30 +96,38 @@ export function PersonDetails({ id }: { id: string }) {
             <CardHeader>
               <div className="flex items-center gap-2">
                 <Film className="text-primary h-5 w-5" />
+
                 <CardTitle>Appears In</CardTitle>
               </div>
             </CardHeader>
+
             <CardContent>
-              {films.data.length > 0 ? (
+              {films.isLoading ? (
+                <FilmCardSkeleton />
+              ) : films.data.length > 0 ? (
                 <div className="grid grid-cols-1 gap-4">
                   {films.data.map((film) => (
                     <Card key={film.id} className="overflow-hidden">
                       <CardHeader>
                         <CardTitle className="text-xl">{film.title}</CardTitle>
+
                         <CardDescription>
                           {film.original_title} ({film.release_date})
                         </CardDescription>
                       </CardHeader>
+
                       <CardContent>
                         <div className="grid grid-cols-2 gap-2">
                           <div>
                             <span className="font-medium">Director:</span>
+
                             <p className="text-muted-foreground">
                               {film.director}
                             </p>
                           </div>
                           <div>
                             <span className="font-medium">Rating:</span>
+
                             <div className="text-muted-foreground flex items-center gap-1">
                               <Star className="fill-primary text-primary h-4 w-4" />
                               {film.rt_score}%
@@ -123,6 +135,7 @@ export function PersonDetails({ id }: { id: string }) {
                           </div>
                         </div>
                       </CardContent>
+
                       <div className="px-6 pb-4">
                         <Link href={`/films/${film.id}`}>
                           <Button variant="outline" size="sm">
