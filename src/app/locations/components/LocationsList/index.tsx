@@ -157,8 +157,16 @@ export function LocationsList() {
                   </CardTitle>
                 </div>
                 <CardDescription className="flex gap-2">
-                  <Badge variant="default">{location.climate}</Badge>
-                  <Badge variant="secondary">{location.terrain}</Badge>
+                  <Badge variant="default">
+                    {location.climate === 'TODO'
+                      ? 'Unavailable'
+                      : location.climate}
+                  </Badge>
+                  <Badge variant="secondary">
+                    {location.terrain === 'TODO'
+                      ? 'Unavailable'
+                      : location.terrain}
+                  </Badge>
                 </CardDescription>
               </CardHeader>
               <CardContent>
