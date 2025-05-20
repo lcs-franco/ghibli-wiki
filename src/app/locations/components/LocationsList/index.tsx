@@ -165,12 +165,6 @@ export function LocationsList() {
                       {location.surface_water}%
                     </p>
                   </div>
-                  <div>
-                    <span className="font-medium">Films:</span>
-                    <p className="text-muted-foreground">
-                      {location.films.length}
-                    </p>
-                  </div>
                 </div>
               </CardContent>
               <CardFooter>
