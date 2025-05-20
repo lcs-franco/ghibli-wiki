@@ -2,7 +2,7 @@ import { useGhibliContext } from '@lib/contexts/GhibliContext'
 import { useLocations } from '@lib/hooks/locations/useLocations'
 
 export function useLocationListController() {
-  const { data: locations } = useLocations()
+  const { data: locations, error } = useLocations()
 
   const {
     searchQuery,
@@ -76,5 +76,6 @@ export function useLocationListController() {
     handleClimateChange,
     handleTerrainChange,
     filteredLocations,
+    error,
   }
 }

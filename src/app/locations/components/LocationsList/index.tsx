@@ -2,6 +2,7 @@
 
 import { Filter, Search } from 'lucide-react'
 
+import { Alert, AlertDescription, AlertTitle } from '@components/ui/alert'
 import { Badge } from '@components/ui/badge'
 import { Button } from '@components/ui/button'
 import {
@@ -37,9 +38,23 @@ export function LocationsList() {
     handleClimateChange,
     handleTerrainChange,
     filteredLocations,
+    error,
   } = useLocationListController()
 
   const { climate, terrain } = filters.locations
+
+  if (error) {
+    return (
+      <Alert variant="destructive" className="mt-8">
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>
+          {error instanceof Error
+            ? error.message
+            : 'Failed to load locations. Please try again later.'}
+        </AlertDescription>
+      </Alert>
+    )
+  }
 
   return (
     <div className="mt-8 space-y-6">
