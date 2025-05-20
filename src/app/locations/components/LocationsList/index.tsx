@@ -25,6 +25,7 @@ import {
 } from '@components/ui/dropdown-menu'
 import { Input } from '@components/ui/input'
 import Link from 'next/link'
+import { LocationsListSkeleton } from './Skeleton'
 import { useLocationListController } from './useLocationListController'
 
 export function LocationsList() {
@@ -39,9 +40,12 @@ export function LocationsList() {
     handleTerrainChange,
     filteredLocations,
     error,
+    isLoading,
   } = useLocationListController()
 
   const { climate, terrain } = filters.locations
+
+  if (isLoading) return <LocationsListSkeleton />
 
   if (error) {
     return (
