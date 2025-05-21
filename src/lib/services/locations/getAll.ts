@@ -1,3 +1,4 @@
+import { Location } from '@lib/types'
 import { httpClient } from '../httpClient'
 
 type LocationResponse = Location[]
