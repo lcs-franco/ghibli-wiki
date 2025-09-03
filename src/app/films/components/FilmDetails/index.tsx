@@ -1,5 +1,9 @@
 'use client'
 
+import { ArrowLeft, Leaf, MapPin, Star, Tractor, Users } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+
 import { Alert, AlertDescription, AlertTitle } from '@components/ui/alert'
 import { Button } from '@components/ui/button'
 import {
@@ -12,15 +16,21 @@ import {
 import { Skeleton } from '@components/ui/skeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs'
 import { useFilmsById } from '@lib/hooks/films/useFilmsById'
-import { useRelatedEntities } from '@lib/hooks/useRelatedEntities'
-import { ArrowLeft, Leaf, MapPin, Star, Tractor, Users } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
+import {
+  useRelatedLocations,
+  useRelatedPeople,
+  useRelatedSpecies,
+  useRelatedVehicles,
+} from '@lib/hooks/related'
+
 import { FilmDetailsSkeleton, PeopleTabSkeleton } from './Skeleton'
 
 export function FilmDetails({ id }: { id: string }) {
   const { data: film, isLoading, error } = useFilmsById(id)
-  const { locations, people, species, vehicles } = useRelatedEntities(film)
+  const people = useRelatedPeople(film)
+  const locations = useRelatedLocations(film)
+  const species = useRelatedSpecies(film)
+  const vehicles = useRelatedVehicles(film)
 
   if (isLoading) return <FilmDetailsSkeleton />
 
