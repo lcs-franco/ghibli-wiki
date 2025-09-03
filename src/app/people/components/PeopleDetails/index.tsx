@@ -14,12 +14,13 @@ import {
   CardTitle,
 } from '@components/ui/card'
 import { usePeopleById } from '@lib/hooks/people/usePeopleById'
-import { useRelatedEntities } from '@lib/hooks/useRelatedEntities'
+import { useRelatedFilms, useRelatedSpecies } from '@lib/hooks/related'
 import { FilmCardSkeleton, PersonDetailsSkeleton } from './Skeleton'
 
 export function PersonDetails({ id }: { id: string }) {
   const { data: person, isLoading, error } = usePeopleById(id)
-  const { films, species } = useRelatedEntities(person)
+  const films = useRelatedFilms(person)
+  const species = useRelatedSpecies(person)
 
   if (isLoading) return <PersonDetailsSkeleton />
 

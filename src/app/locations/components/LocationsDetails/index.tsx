@@ -1,5 +1,8 @@
 'use client'
 
+import { ArrowLeft, Droplets, Film, MapPin, Users } from 'lucide-react'
+import Link from 'next/link'
+
 import { Alert, AlertDescription, AlertTitle } from '@components/ui/alert'
 import { Button } from '@components/ui/button'
 import {
@@ -12,9 +15,8 @@ import {
 } from '@components/ui/card'
 import { Progress } from '@components/ui/progress'
 import { useLocationById } from '@lib/hooks/locations/useLocationById'
-import { useRelatedEntities } from '@lib/hooks/useRelatedEntities'
-import { ArrowLeft, Droplets, Film, MapPin, Users } from 'lucide-react'
-import Link from 'next/link'
+import { useRelatedFilms, useRelatedPeople } from '@lib/hooks/related'
+
 import {
   FilmCardSkeleton,
   LocationDetailsSkeleton,
@@ -23,7 +25,8 @@ import {
 
 export function LocationDetails({ id }: { id: string }) {
   const { data: location, isLoading, error } = useLocationById(id)
-  const { residents, films } = useRelatedEntities(location)
+  const residents = useRelatedPeople(location, 'residents')
+  const films = useRelatedFilms(location)
 
   if (isLoading) return <LocationDetailsSkeleton />
 
