@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 Studio Ghibli Wiki
 
-## Getting Started
+> **⚠️ This project is currently in development**
 
-First, run the development server:
+A modern, interactive wiki application for exploring the magical world of Studio Ghibli films. Built with Next.js 15 and featuring comprehensive information about films, characters, locations, species, and vehicles from the legendary animation studio.
+
+## ✨ Features
+
+- **🎭 Comprehensive Film Database**: Browse all Studio Ghibli films with detailed information including ratings, directors, producers, and descriptions
+- **👥 Character Profiles**: Explore memorable characters with their species, gender, and film appearances
+- **🗺️ Magical Locations**: Discover the enchanting places and settings from Ghibli films
+- **🌿 Species & Creatures**: Learn about the various species and magical creatures in the Ghibli universe
+- **🚗 Vehicles & Transports**: Explore unique and magical transportation from the films
+- **🔍 Advanced Search & Filtering**: Search across all content with filters for directors, decades, ratings, and more
+- **📱 Responsive Design**: Beautiful, mobile-first design that works on all devices
+- **🎨 Custom UI Components**: Built with Radix UI and Tailwind CSS for accessibility and performance
+- **⚡ Real-time Data**: Powered by React Query for efficient data fetching and caching
+- **🎪 Interactive Carousels**: Featured films with autoplay carousels and smooth animations
+- **🔗 Related Content Discovery**: Smart suggestions for related films, characters, and locations
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- **Next.js 15** - React framework with App Router
+- **React 19** - Latest React with concurrent features
+- **TypeScript** - Type-safe development
+- **Tailwind CSS 4** - Utility-first CSS framework
+- **Framer Motion** - Smooth animations and transitions
+
+### UI & Components
+
+- **Radix UI** - Accessible, unstyled UI primitives
+- **Lucide React** - Beautiful icon library
+- **Embla Carousel** - Touch-friendly carousel component
+- **Class Variance Authority** - Component variant management
+
+### Data Management
+
+- **TanStack Query** - Server state management and caching
+- **Axios** - HTTP client for API requests
+- **React Context** - Global state management for filters and search
+
+### Development Tools
+
+- **ESLint** - Code linting and quality
+- **Prettier** - Code formatting
+- **Husky** - Git hooks for quality assurance
+- **Commitlint** - Conventional commit messages
+- **TypeScript** - Static type checking
+
+### Data Source
+
+- **Ghibli API** - Official Studio Ghibli API (ghibliapi.vercel.app)
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 20.x or higher
+- npm
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/ghibli-wiki.git
+cd ghibli-wiki
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── films/             # Film-related pages and components
+│   ├── people/            # Character pages and components
+│   ├── locations/         # Location pages and components
+│   └── page.tsx           # Home page
+├── components/            # Reusable UI components
+│   ├── ui/               # Base UI components (Radix UI)
+│   └── ...               # Feature-specific components
+├── lib/                   # Core application logic
+│   ├── contexts/         # React contexts
+│   ├── hooks/            # Custom React hooks
+│   ├── services/         # API services
+│   └── types/            # TypeScript type definitions
+└── utils/                # Utility functions
+```
 
-## Learn More
+## 🎯 Key Features Implementation
 
-To learn more about Next.js, take a look at the following resources:
+### Search & Filtering System
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Global search across all content types
+- Advanced filtering by director, decade, rating, species, gender, climate, and terrain
+- Real-time search with debounced input
+- Context-based filter management
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Data Architecture
 
-## Deploy on Vercel
+- Type-safe API integration with TypeScript
+- Efficient data fetching with React Query
+- Optimistic updates and error handling
+- Infinite scroll and pagination support
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### UI/UX Design
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Mobile-first responsive design
+- Custom masked images with SVG shapes
+- Smooth animations and transitions
+- Loading states and error boundaries
+- Accessible components with ARIA support
+
+## 📄 License
+
+This project is for educational purposes and uses data from the [Studio Ghibli API](https://ghibliapi.vercel.app/).
+
+## 🙏 Acknowledgments
+
+- [Studio Ghibli](https://www.ghibli.jp/) for creating these magical films
+- [Ghibli API](https://ghibliapi.vercel.app/) for providing the data
