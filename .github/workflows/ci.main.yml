@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # necessário pra analisar histórico
+          fetch-depth: 0
 
       - name: Ensure main is descendant of development
         run: |

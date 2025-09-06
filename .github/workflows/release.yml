@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_message:
+        description: 'Default commit message'
+        default: 'Merge development → main'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Checkout main
+        run: git checkout main
+
+      - name: Merge development into main
+        run: |
+          git fetch origin development
+          git merge --no-ff origin/development -m "${{ github.event.inputs.commit_message }}"
+
+      - name: Push to main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git push origin main
