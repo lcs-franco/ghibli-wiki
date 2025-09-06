@@ -28,4 +28,7 @@ jobs:
       - name: Push to main
         env:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: git push https://x-access-token:${PAT_TOKEN}@github.com/lcs-franco/ghibli-wiki.git main
+        run: |
+          git config user.name "Lucas Franco"
+          git config user.email "lcs.franco556@gmail.com"
+          git push https://x-access-token:${PAT_TOKEN}@github.com/lcs-franco/ghibli-wiki.git main
