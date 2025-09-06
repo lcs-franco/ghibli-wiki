@@ -1,0 +1,24 @@
+name: Check main origin
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  verify-origin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ensure main is descendant of development
+        run: |
+          git fetch origin development
+          if ! git merge-base --is-ancestor origin/development HEAD; then
+            echo "❌ This commit in main does not come from development!"
+            exit 1
+          fi
