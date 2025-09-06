@@ -27,5 +27,5 @@ jobs:
 
       - name: Push to main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: git push origin main
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: git push https://x-access-token:${PAT_TOKEN}@github.com/lcs-franco/ghibli-wiki.git main
