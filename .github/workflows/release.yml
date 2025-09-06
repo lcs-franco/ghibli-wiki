@@ -1,14 +1,14 @@
-name: Promote Development to Main
+name: Release
 
 on:
   workflow_dispatch:
     inputs:
       commit_message:
-        description: 'Mensagem do commit do merge'
-        default: 'Merge dev → main'
+        description: 'Default commit message'
+        default: 'Merge development → main'
 
 jobs:
-  merge-dev-to-main:
+  release:
     runs-on: ubuntu-latest
 
     steps:
