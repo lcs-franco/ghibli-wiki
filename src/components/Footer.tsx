@@ -6,7 +6,7 @@ export function Footer() {
     <footer className="border-t py-6 md:py-0">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 md:px-8">
         <div className="flex items-center gap-2">
-          <Totoro className="text-primary h-10 w-10" />
+          <Totoro className="h-10 w-10" />
           <p className="text-muted-foreground text-sm">
             © {new Date().getFullYear()} Studio Ghibli Wiki. All rights
             reserved.
