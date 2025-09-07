@@ -3,9 +3,18 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
-      commit_message:
-        description: 'Default commit message'
-        default: 'Merge development → main'
+      version_type:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      release_notes:
+        description: 'Release notes (optional)'
+        required: false
 
 jobs:
   release:
@@ -19,21 +28,51 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Checkout main
-        run: git checkout main
-
       - name: Configure git user
         run: |
           git config user.name "Lucas Franco"
           git config user.email "lcs.franco556@gmail.com"
 
-      - name: Merge development into main
-        run: |
-          git fetch origin development
-          git merge --no-ff origin/development -m "${{ github.event.inputs.commit_message }}"
+      - name: Checkout development
+        run: git checkout development
 
-      - name: Push to main
+      - name: Bump version
+        run: |
+          NEW_VERSION=$(npm version ${{ github.event.inputs.version_type }} --no-git-tag-version)
+          echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
+          echo "New version: ${NEW_VERSION}"
+
+      - name: Commit version bump
+        run: |
+          git add package.json package-lock.json
+          git commit -m "chore: bump version to ${NEW_VERSION}"
+
+      - name: Create and push tag
+        run: |
+          git tag ${NEW_VERSION}
+          git push origin development
+          git push origin ${NEW_VERSION}
+
+      - name: Checkout and merge to main
+        run: |
+          git checkout main
+          git merge --no-ff development -m "release: ${NEW_VERSION}"
+          git push origin main
+
+      - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git push origin main
+          RELEASE_NOTES="${{ github.event.inputs.release_notes }}"
+          if [ -z "$RELEASE_NOTES" ]; then
+            RELEASE_NOTES="Automated release with version bump from development branch."
+          fi
+
+          gh release create ${NEW_VERSION} \
+            --title "Release ${NEW_VERSION}" \
+            --notes "**Release ${NEW_VERSION}**
+
+          $RELEASE_NOTES
+
+          **Changes:**
+          Merged development branch into main with version bump."
