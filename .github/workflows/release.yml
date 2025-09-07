@@ -40,7 +40,7 @@ jobs:
         run: |
           NEW_VERSION=$(npm version ${{ github.event.inputs.version_type }} --no-git-tag-version)
           echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
-          echo "🔖 New version: ${NEW_VERSION}"
+          echo "New version: ${NEW_VERSION}"
 
       - name: Commit version bump
         run: |
@@ -70,7 +70,7 @@ jobs:
 
           gh release create ${NEW_VERSION} \
             --title "Release ${NEW_VERSION}" \
-            --notes "🚀 **Release ${NEW_VERSION}**
+            --notes "**Release ${NEW_VERSION}**
 
           $RELEASE_NOTES
 
